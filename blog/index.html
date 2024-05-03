@@ -115,12 +115,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/HexoBlog/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>
@@ -137,6 +137,98 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://skar5268.github.io/HexoBlog/2024/05/03/JS-Clock/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/HexoBlog/images/avatar.gif">
+      <meta itemprop="name" content="阿若">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿若的 Hexo 部落格">
+      <meta itemprop="description" content="還不知道要放什麼東西">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 阿若的 Hexo 部落格">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/HexoBlog/2024/05/03/JS-Clock/" class="post-title-link" itemprop="url">JS Clock</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+      
+
+      <time title="創建時間：2024-05-03 18:13:44 / 修改時間：19:05:08" itemprop="dateCreated datePublished" datetime="2024-05-03T18:13:44+08:00">2024-05-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p><a href="https://skar5268.github.io/JavaScript30/02%20-%20JS%20and%20CSS%20Clock/index-START.html">成品</a></p>
+</blockquote>
+<p>其實我現在還是不太懂時間角度的算法，數學都還給老師ㄌ。<br>因此試著紀錄看看，說不定會比較能理解？</p>
+<h2 id="一、首先需要一個時鐘，並設定秒針、時針、分針樣式"><a href="#一、首先需要一個時鐘，並設定秒針、時針、分針樣式" class="headerlink" title="一、首先需要一個時鐘，並設定秒針、時針、分針樣式"></a>一、首先需要一個時鐘，並設定秒針、時針、分針樣式</h2><p>這邊直接拿教材使用，所以沒什麼好講解ㄉ</p>
+<h2 id="二、取得時間"><a href="#二、取得時間" class="headerlink" title="二、取得時間"></a>二、取得時間</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const now = new Date();  /*取得現在時間*/</span><br><span class="line">const seconds = now.getSeconds(); // 取得秒鐘</span><br><span class="line">const minutes = now.getMinutes(); // 取得分鐘</span><br><span class="line">const hours = now.getHours(); // 取得小時</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、取得秒針、分針、時針的角度"><a href="#三、取得秒針、分針、時針的角度" class="headerlink" title="三、取得秒針、分針、時針的角度"></a>三、取得秒針、分針、時針的角度</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> secondsDegrees = seconds / 60 * 360 + 90;</span><br><span class="line"><span class="built_in">let</span> minutesDegrees = (minutes / 60) * 360 + 90 + ((seconds / <span class="number">60</span>) * (<span class="number">360</span> / <span class="number">60</span>)); </span><br><span class="line"><span class="built_in">let</span> hoursDegrees = (hours / 12) * 360 + 90 + ((minutes / <span class="number">60</span>) * (<span class="number">360</span> / <span class="number">12</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="秒針角度："><a href="#秒針角度：" class="headerlink" title="秒針角度："></a>秒針角度：</h3><p>秒針走一圈是 60 秒，因此秒鐘 &#x2F; 60 &#x3D; 秒針所在的位置。<br>由於時鐘是圓形的，且時鐘的起點是 90 度，所以秒針的角度為秒針所在的位置 * 360 後再 + 90。</p>
+<h3 id="分針角度："><a href="#分針角度：" class="headerlink" title="分針角度："></a>分針角度：</h3><p>分針走一圈是 60 分鐘，因此分鐘 &#x2F; 60 &#x3D; 分針所在的位置。<br>由於時鐘是圓形的，且時鐘的起點是 90 度，所以分針的角度為分針所在的位置 * 360 後再 + 90。<br>然而秒針也會影響分針的角度，秒針走一圈，分針會走一格（一分鐘）。換句話說， 分針一秒鐘會移動 1 度。<br>因此實際分針的角度為：先前所得出的分針角度 + 秒數</p>
+<h3 id="時針角度："><a href="#時針角度：" class="headerlink" title="時針角度："></a>時針角度：</h3><p>時針走一圈是 12 小時，因此小時 &#x2F; 12 &#x3D; 時針所在的位置。<br>由於時鐘是圓形的，且時鐘的起點是 90 度，所以時針的角度為時針所在的位置 * 360 後再 + 90。<br>然而分針也會影響時針的角度，分針走一圈，時針會走一格（一小時）。換句話說， 時針一分鐘會移動  0.5 度。<br>因此實際時針的角度為：先前算出的角度 + 分鐘 * 0.5</p>
+<p><strong>簡化後程式碼：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> secondsDegrees = (seconds / 60) * 360 + 90;</span><br><span class="line"><span class="built_in">let</span> minutesDegrees = (minutes / 60) * 360 + 90 + seconds; </span><br><span class="line"><span class="built_in">let</span> hoursDegrees = (hours / 12) * 360 + 90 + (minutes * 0.5);</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、取得-DOM，並給予他們樣式（目前時間的角度）"><a href="#四、取得-DOM，並給予他們樣式（目前時間的角度）" class="headerlink" title="四、取得 DOM，並給予他們樣式（目前時間的角度）"></a>四、取得 DOM，並給予他們樣式（目前時間的角度）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const secondHand = document.querySelector(<span class="string">&#x27;.second-hand&#x27;</span>);</span><br><span class="line">const minHand = document.querySelector(<span class="string">&#x27;.min-hand&#x27;</span>);</span><br><span class="line">const hourHand = document.querySelector(<span class="string">&#x27;.hour-hand&#x27;</span>);</span><br><span class="line"></span><br><span class="line">secondHand.style.transform = `rotate(<span class="variable">$&#123;secondsDegrees&#125;</span>deg)`;</span><br><span class="line">minHand.style.transform = `rotate(<span class="variable">$&#123;minutesDegrees&#125;</span>deg)`;</span><br><span class="line">hourHand.style.transform = `rotate(<span class="variable">$&#123;hoursDegrees&#125;</span>deg)`;</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、設定秒、分、時針每秒移動的角度"><a href="#五、設定秒、分、時針每秒移動的角度" class="headerlink" title="五、設定秒、分、時針每秒移動的角度"></a>五、設定秒、分、時針每秒移動的角度</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">setDate</span></span>() &#123;</span><br><span class="line"> hoursDegrees = hoursDegrees +  360 / (12 * 60 * 60); // 一秒鐘移動 1/120 度</span><br><span class="line"> minutesDegrees = minutesDegrees + 360 / (60 * 60);  // 一秒鐘移動 1 度</span><br><span class="line"> secondsDegrees = secondsDegrees + 360 / 60; // 一秒鐘移動 6 度</span><br><span class="line"></span><br><span class="line"> secondHand.style.transform = `rotate(<span class="variable">$&#123;secondsDegrees&#125;</span>deg)`;</span><br><span class="line"> minHand.style.transform = `rotate(<span class="variable">$&#123;minutesDegrees&#125;</span>deg)`;</span><br><span class="line"> hourHand.style.transform = `rotate(<span class="variable">$&#123;hoursDegrees&#125;</span>deg)`;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>簡化後程式碼</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">setDate</span></span>() &#123;</span><br><span class="line"> hoursDegrees = hoursDegrees +  1/120;</span><br><span class="line"> minutesDegrees = minutesDegrees + 1;</span><br><span class="line"> secondsDegrees = secondsDegrees + 6;</span><br><span class="line"></span><br><span class="line"> secondHand.style.transform = `rotate(<span class="variable">$&#123;secondsDegrees&#125;</span>deg)`;</span><br><span class="line"> minHand.style.transform = `rotate(<span class="variable">$&#123;minutesDegrees&#125;</span>deg)`;</span><br><span class="line"> hourHand.style.transform = `rotate(<span class="variable">$&#123;hoursDegrees&#125;</span>deg)`;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、執行函式"><a href="#六、執行函式" class="headerlink" title="六、執行函式"></a>六、執行函式</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setInterval(setDate, 1000) </span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
