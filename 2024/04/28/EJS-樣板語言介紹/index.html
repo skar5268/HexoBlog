@@ -1,29 +1,16 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html>
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/HexoBlog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/HexoBlog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/HexoBlog/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/HexoBlog/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/HexoBlog/css/main.css">
-
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"skar5268.github.io","root":"/HexoBlog/","images":"/HexoBlog/images","scheme":"Muse","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/HexoBlog/js/config.js"></script>
-
-    <meta name="description" content="EJS 全名為 Embedded JavaScript templating，它將 HTML 程式碼分為模板（Template）和動態資料（JSON、其他 .ejs 檔案），以 JS 生成 HTML 程式碼。換句話說，EJS 使開發者能在 HTML 中嵌入 JS，以渲染內容，在管理網站的共同區塊上非常方便。">
+  <meta charset="utf-8">
+  
+  
+  <title>EJS 樣板語言介紹 | 前端日誌</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="EJS 全名為 Embedded JavaScript templating，它將 HTML 程式碼分為模板（Template）和動態資料（JSON、其他 .ejs 檔案），以 JS 生成 HTML 程式碼。換句話說，EJS 使開發者能在 HTML 中嵌入 JS，以渲染內容，在管理網站的共同區塊上非常方便。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="EJS 樣板語言介紹">
 <meta property="og:url" content="https://skar5268.github.io/HexoBlog/2024/04/28/EJS-%E6%A8%A3%E6%9D%BF%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/index.html">
-<meta property="og:site_name" content="阿若的 Hexo 部落格">
+<meta property="og:site_name" content="前端日誌">
 <meta property="og:description" content="EJS 全名為 Embedded JavaScript templating，它將 HTML 程式碼分為模板（Template）和動態資料（JSON、其他 .ejs 檔案），以 JS 生成 HTML 程式碼。換句話說，EJS 使開發者能在 HTML 中嵌入 JS，以渲染內容，在管理網站的共同區塊上非常方便。">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2024-04-28T05:55:52.000Z">
@@ -31,256 +18,250 @@
 <meta property="article:author" content="阿若">
 <meta property="article:tag" content="教學">
 <meta name="twitter:card" content="summary">
-
-
-<link rel="canonical" href="https://skar5268.github.io/HexoBlog/2024/04/28/EJS-%E6%A8%A3%E6%9D%BF%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/">
-
-
-
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://skar5268.github.io/HexoBlog/2024/04/28/EJS-%E6%A8%A3%E6%9D%BF%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/","path":"2024/04/28/EJS-樣板語言介紹/","title":"EJS 樣板語言介紹"}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>EJS 樣板語言介紹 | 阿若的 Hexo 部落格</title>
   
-
-
-
-
-
-
-
-
-  <noscript>
-    <link rel="stylesheet" href="/HexoBlog/css/noscript.css">
-  </noscript>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切換導航欄" role="button">
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/HexoBlog/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">阿若的 Hexo 部落格</p>
-      <i class="logo-line"></i>
-    </a>
-      <p class="site-subtitle" itemprop="description">Hexo 部落格</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-</header>
-        
+    <link rel="alternate" href="/HexoBlog/atom.xml" title="前端日誌" type="application/atom+xml">
   
-  <aside class="sidebar">
+  
+    <link rel="shortcut icon" href="/HexoBlog/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/HexoBlog/css/style.css">
 
-    <div class="sidebar-inner sidebar-overview-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目錄
-        </li>
-        <li class="sidebar-nav-overview">
-          本站概要
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">阿若</p>
-  <div class="site-description" itemprop="description">還不知道要放什麼東西</div>
-</div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/HexoBlog/archives/">
-          <span class="site-state-item-count">4</span>
-          <span class="site-state-item-name">文章</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">標籤</span>
-      </div>
-  </nav>
-</div>
-
-        </div>
-      </div>
-    </div>
-
+  
     
-  </aside>
-
-
-    </div>
-
-    <div class="main-inner post posts-expand">
-
+<link rel="stylesheet" href="/HexoBlog/fancybox/jquery.fancybox.min.css">
 
   
-
-
-<div class="post-block">
   
-  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://skar5268.github.io/HexoBlog/2024/04/28/EJS-%E6%A8%A3%E6%9D%BF%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/">
+<meta name="generator" content="Hexo 7.2.0"></head>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/HexoBlog/images/avatar.gif">
-      <meta itemprop="name" content="阿若">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿若的 Hexo 部落格">
-      <meta itemprop="description" content="還不知道要放什麼東西">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="EJS 樣板語言介紹 | 阿若的 Hexo 部落格">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          EJS 樣板語言介紹
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
+<body>
+  <div id="container" class="">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/HexoBlog/" id="logo">前端日誌</a>
+      </h1>
       
-
-      <time title="創建時間：2024-04-28 13:55:52 / 修改時間：14:31:17" itemprop="dateCreated datePublished" datetime="2024-04-28T13:55:52+08:00">2024-04-28</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody"><p>EJS 全名為 Embedded JavaScript templating，它將 HTML 程式碼分為模板（Template）和動態資料（JSON、其他 .ejs 檔案），以 JS 生成 HTML 程式碼。<br>換句話說，EJS 使開發者能在 HTML 中嵌入 JS，以渲染內容，在管理網站的共同區塊上非常方便。</p>
-
+        <h2 id="subtitle-wrap">
+          <a href="/HexoBlog/" id="subtitle">Frontend Diaries</a>
+        </h2>
+      
     </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/HexoBlog/tags/%E6%95%99%E5%AD%B8/" rel="tag"># 教學</a>
-          </div>
-
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
         
+          <a class="main-nav-link" href="/HexoBlog/">首頁</a>
+        
+          <a class="main-nav-link" href="/HexoBlog/blog">文章</a>
+        
+          <a class="main-nav-link" href="/HexoBlog/about">關於</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/HexoBlog/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜尋"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://skar5268.github.io/HexoBlog"></form>
+      </div>
+    </div>
+  </div>
+</header>
 
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/HexoBlog/2024/04/28/Hexo-%E6%9E%B6%E7%AB%99%E6%AD%A5%E9%A9%9F/" rel="prev" title="Hexo 架站步驟">
-                  <i class="fa fa-angle-left"></i> Hexo 架站步驟
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/HexoBlog/2024/05/03/JS-Clock/" rel="next" title="JS Clock">
-                  JS Clock <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
+      <div class="outer">
+        <section id="main"><article id="post-EJS-樣板語言介紹" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/HexoBlog/2024/04/28/EJS-%E6%A8%A3%E6%9D%BF%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/" class="article-date">
+  <time class="dt-published" datetime="2024-04-28T05:55:52.000Z" itemprop="datePublished">2024-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      EJS 樣板語言介紹
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>EJS 全名為 Embedded JavaScript templating，它將 HTML 程式碼分為模板（Template）和動態資料（JSON、其他 .ejs 檔案），以 JS 生成 HTML 程式碼。<br>換句話說，EJS 使開發者能在 HTML 中嵌入 JS，以渲染內容，在管理網站的共同區塊上非常方便。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://skar5268.github.io/HexoBlog/2024/04/28/EJS-%E6%A8%A3%E6%9D%BF%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/" data-id="clwi2rktz0003bgv4e5crb5uh" data-title="EJS 樣板語言介紹" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/HexoBlog/tags/%E6%95%99%E5%AD%B8/" rel="tag">教學</a></li></ul>
+
     </footer>
-  </article>
-</div>
-
-
-
-
-
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-  <div class="copyright">
-    &copy; 
-    <span itemprop="copyrightYear">2024</span>
-    <span class="with-love">
-      <i class="fa fa-heart"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">阿若</span>
   </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  
+    
+<nav id="article-nav">
+  
+    <a href="/HexoBlog/2024/05/03/JS-Clock/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JS Clock
+        
+      </div>
+    </a>
+  
+  
+    <a href="/HexoBlog/2024/04/28/Hexo-%E6%9E%B6%E7%AB%99%E6%AD%A5%E9%A9%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hexo 架站步驟</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/HexoBlog/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/HexoBlog/tags/JS-30-%E5%A4%A9%E6%8C%91%E6%88%B0/" rel="tag">JS 30 天挑戰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/HexoBlog/tags/%E6%95%99%E5%AD%B8/" rel="tag">教學</a></li><li class="tag-list-item"><a class="tag-list-link" href="/HexoBlog/tags/%E9%A0%90%E8%A8%AD/" rel="tag">預設</a></li></ul>
+    </div>
   </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/HexoBlog/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/HexoBlog/tags/JS-30-%E5%A4%A9%E6%8C%91%E6%88%B0/" style="font-size: 10px;">JS 30 天挑戰</a> <a href="/HexoBlog/tags/%E6%95%99%E5%AD%B8/" style="font-size: 20px;">教學</a> <a href="/HexoBlog/tags/%E9%A0%90%E8%A8%AD/" style="font-size: 10px;">預設</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/HexoBlog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/HexoBlog/archives/2024/04/">四月 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/HexoBlog/2024/05/22/%E5%9C%96%E7%89%87%E8%BC%AA%E6%92%AD/">圖片輪播</a>
+          </li>
+        
+          <li>
+            <a href="/HexoBlog/2024/05/22/CSS-Reset/">CSS Reset</a>
+          </li>
+        
+          <li>
+            <a href="/HexoBlog/2024/05/03/JS-Clock/">JS Clock</a>
+          </li>
+        
+          <li>
+            <a href="/HexoBlog/2024/04/28/EJS-%E6%A8%A3%E6%9D%BF%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/">EJS 樣板語言介紹</a>
+          </li>
+        
+          <li>
+            <a href="/HexoBlog/2024/04/28/Hexo-%E6%9E%B6%E7%AB%99%E6%AD%A5%E9%A9%9F/">Hexo 架站步驟</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 阿若<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
 
     </div>
-  </footer>
+    <nav id="mobile-nav">
+  
+    <a href="/HexoBlog/" class="mobile-nav-link">首頁</a>
+  
+    <a href="/HexoBlog/blog" class="mobile-nav-link">文章</a>
+  
+    <a href="/HexoBlog/about" class="mobile-nav-link">關於</a>
+  
+</nav>
+    
+
+
+<script src="/HexoBlog/js/jquery-3.6.4.min.js"></script>
+
+
 
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
+<script src="/HexoBlog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/HexoBlog/js/script.js"></script>
+
+
+
+
+
   </div>
-  <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="回到頂端">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/HexoBlog/js/comments.js"></script><script src="/HexoBlog/js/utils.js"></script><script src="/HexoBlog/js/motion.js"></script><script src="/HexoBlog/js/schemes/muse.js"></script><script src="/HexoBlog/js/sidebar.js"></script><script src="/HexoBlog/js/next-boot.js"></script>
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
 </body>
+
+<style>
+  .fullPage #main{
+    width: 100%;
+    float: none;
+    margin: 0;
+
+    .article-meta, .article-header, .article-footer{
+      display: none;
+    }
+  }
+</style>
 </html>
